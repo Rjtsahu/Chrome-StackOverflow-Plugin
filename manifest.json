@@ -1,0 +1,18 @@
+{
+  "name": "Print this page",
+  "description": "Adds a print button to the browser.",
+  "version": "1.2",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "browser_action": {
+      "default_title": "Quick StackOverflow",
+      "default_icon": "so-icon.png",
+      "default_popup":"home.html"
+  },
+  "manifest_version": 2
+}
