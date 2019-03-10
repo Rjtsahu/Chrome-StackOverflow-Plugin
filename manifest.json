@@ -8,6 +8,7 @@
   },
   "permissions": [
     "activeTab",
+    "https://stackoverflow.com/",
     "https://api.stackexchange.com/"
   ],
   "browser_action": {
