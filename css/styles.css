@@ -1,5 +1,6 @@
 body{
     min-width:400px;
     min-height:200px;
-    background-color: rgb(63, 130, 218)
+    border-top: 1px solid #8dc1ec;
+    border-bottom: 1px solid #8dc1ec;
 }

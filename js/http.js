@@ -24,6 +24,7 @@ const searchQueryParameters = {
     key: '',
     intitle: 'query string in url'
 }
+
 const parser = Parser();
 
 async function getStackOverflowResults(searchCriteria) {
@@ -135,4 +136,4 @@ axios.interceptors.response.use(function (response) {
 
 // getAnswersForQuestion(54279317);
 
-getQuestionHTML();
+// getQuestionHTML();
