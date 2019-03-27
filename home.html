@@ -1,23 +1,48 @@
 <html>
-    <head>
-    
+
+<head>
+
     <title>Quick StackOverflow</title>
-   <link rel="stylesheet" href="./css/styles.css" />
-   <link rel="stylesheet" href="./css/materialize.css" />
-   
-   <script src="./js/jquery-3.3.1.min.js"></script>
-   <script src="./js/materialize.min.js"></script>
-   <script src="./js/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/materialize.css" />
 
-   </head>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/materialize.min.js"></script>
+    <script src="./js/axios.min.js"></script>
 
-    <body>
-        <h2>
-            This is home.
-        </h2>
+</head>
 
-        <script type="text/javascript" src="./js/parser.js"></script>
-        <script type="text/javascript" src="./js/http.js"></script>
-        <script type="text/javascript" src="./js/main.js"></script>
-    </body>
+<body>
+
+    <div id="container">
+        <div id="search-header">
+            <span style="font-size:16px;" >
+                Chrome Stack Search
+            </span>
+            <input type="text" id="search-input" />
+            <button type="button" id="search-button">Search</button>
+        </div>
+
+        <div class="row">
+            <div class="col s1" id="previous-button">
+                &lt;
+            </div>
+            <div class="col s10 ">
+                <ul>
+                    <li>an item</li>
+                    <li>an item</li>
+                    <li>an item</li>
+                    <li>an item</li>
+                </ul>
+            </div>
+            <div class="col s1" id="next-button">
+                &gt;
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./js/parser.js"></script>
+    <script type="text/javascript" src="./js/http.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+</body>
+
 </html>
