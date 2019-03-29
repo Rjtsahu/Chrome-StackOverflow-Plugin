@@ -12,24 +12,34 @@
 
 </head>
 
-<body class="container blue lighten-4">
+<body>
 
-    <div class="search-bar valign-wrapper row">
-
-        <div class="input-field col s8">
-            <input id="search_text" type="text">
-            
+    <div id="container">
+        <div id="search-header">
+            <span style="font-size:16px;" >
+                Chrome Stack Search
+            </span>
+            <input type="text" id="search-input" />
+            <button type="button" id="search-button">Search</button>
         </div>
 
-        <div class="col s3">
-
-            <button class="btn waves-effect waves-light" type="submit" name="action">
-                Search
-            </button>
-
+        <div class="row">
+            <div class="col s1" id="previous-button">
+                &lt;
+            </div>
+            <div class="col s10 ">
+                <ul>
+                    <li>an item</li>
+                    <li>an item</li>
+                    <li>an item</li>
+                    <li>an item</li>
+                </ul>
+            </div>
+            <div class="col s1" id="next-button">
+                &gt;
+            </div>
         </div>
     </div>
-
     <script type="text/javascript" src="./js/parser.js"></script>
     <script type="text/javascript" src="./js/http.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
