@@ -18,8 +18,8 @@ const PAGE_SIZE = MAX_QUESTION_PER_SEARCH;
 const searchQueryParameters = {
     site: 'stackoverflow',
     sort: 'votes',
-    min: MIN_VOTES,
-    max: MAX_VOTES,
+ //   min: MIN_VOTES,
+ //   max: MAX_VOTES,
     pagesize: PAGE_SIZE,
     key: '',
     intitle: 'query string in url'
@@ -27,9 +27,10 @@ const searchQueryParameters = {
 
 const parser = Parser();
 
-async function getStackOverflowResults(searchCriteria) {
+async function getStackOverflowResults(searchQuery) {
 
-    searchCriteria = searchCriteria || searchQueryParameters;
+    let searchCriteria = Object.assign({},searchQueryParameters);
+    searchCriteria.intitle = searchQuery;
 
     let result = [];
 
