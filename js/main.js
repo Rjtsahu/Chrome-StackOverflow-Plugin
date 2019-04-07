@@ -9,12 +9,10 @@ function initSearch(searchQuery) {
 
     let searchService = new SearchService(searchQuery);
 
-    $("#previous-button").click(searchService.onPrevious);
-    $("#next-button").click(searchService.onNext);
-
+    searchService.init();
 }
 
-function SearchService(searchQuery) {
+ function SearchService(searchQuery) {
 
     var info = {
         currentPageIndex: 0,
@@ -22,14 +20,20 @@ function SearchService(searchQuery) {
     }    
     var searchText = searchQuery;
 
-
+    this.init = async function(){
+        console.log('inside init searchText:',searchText);
+        const questions = await getStackOverflowResults(searchText);
+        console.log('questions : ',questions);
+    }
 }
 
 SearchService.prototype.onPrevious = function () {
-    console.log('onPrevious', this.searchText);
+    console.log('onPrevious');
 }
 
 SearchService.prototype.onNext = function () {
     console.log('onNext');
 }
 
+$("#previous-button").click(SearchService.prototype.onPrevious);
+$("#next-button").click(SearchService.prototype.onNext);
