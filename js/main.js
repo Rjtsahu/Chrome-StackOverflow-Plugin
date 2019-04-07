@@ -1,12 +1,12 @@
 
-$("#search-button").click(()=>{
+$("#search-button").click(() => {
     let searchQuery = $('#search-input').val();
     initSearch(searchQuery);
 });
 
-function initSearch(searchQuery){
-    console.log('searched :',searchQuery);
-    
+function initSearch(searchQuery) {
+    console.log('searched :', searchQuery);
+
     let searchService = new SearchService(searchQuery);
 
     $("#previous-button").click(searchService.onPrevious);
@@ -14,17 +14,22 @@ function initSearch(searchQuery){
 
 }
 
-function SearchService(searchQuery){
+function SearchService(searchQuery) {
 
-    this.currentPageIndex = 0;
-    this.numberOfPages = 0;
-    this.searchText = searchQuery;
+    var info = {
+        currentPageIndex: 0,
+        numberOfPages: 0
+    }    
+    var searchText = searchQuery;
 
-    this.onPrevious = function (){
-        console.log('onPrevious',this.searchText);
-    }
-    
-    this.onNext = function(){
-        console.log('onNext');
-    }
+
 }
+
+SearchService.prototype.onPrevious = function () {
+    console.log('onPrevious', this.searchText);
+}
+
+SearchService.prototype.onNext = function () {
+    console.log('onNext');
+}
+
