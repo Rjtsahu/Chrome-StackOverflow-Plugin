@@ -44,6 +44,13 @@ function SearchService(searchQuery) {
     this.showPageResult = async (data) => {
         console.log('result data: ',data);
         domFactory.showQuestionTitle(data.title);
+        // get question details including html content of question and associated answers.
+        if(data.answer_fetched === false){
+            let questionDetail = await appendQuestionAndAnswerHTML(data);
+            questionDetail.answer_fetched = true;
+            results[info.currentPageIndex] = questionDetail;
+        }
+
     }
 
     this.showNextPage = async () => {

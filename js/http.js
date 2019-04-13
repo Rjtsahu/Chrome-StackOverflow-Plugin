@@ -96,13 +96,8 @@ async function getAnswersForQuestion(question_id, max_answers) {
     }
 }
 
-async function getQuestionHTML(){
-   let questionDetail = {
-        question_id:17131869,
-        link:'https://stackoverflow.com/questions/17131869/how-to-pass-special-characters-as-query-string-in-url',
-        inner_html:'',
-        answers:[]
-    }
+async function appendQuestionAndAnswerHTML(questionDetail){
+    let result = questionDetail || {};
     //  get top answers from api
     questionDetail.answers = await getAnswersForQuestion(questionDetail.question_id);
     // get html page from question link
@@ -114,7 +109,7 @@ async function getQuestionHTML(){
         answer.inner_html = parser.getAnswerDivForQuestion(data,answer.answer_id);
     });
 
-    console.table(questionDetail);
+   return result;
 }
 
 function showQuotaError() {
@@ -134,7 +129,3 @@ axios.interceptors.response.use(function (response) {
     // Show error message.
     return Promise.reject(error);
 });
-
-// getAnswersForQuestion(54279317);
-
-// getQuestionHTML();

@@ -3,10 +3,11 @@
   "description": "Adds a print button to the browser.",
   "version": "1.2",
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["./js/preferences.js","background.js"],
     "persistent": false
   },
   "permissions": [
+    "storage",
     "activeTab",
     "https://stackoverflow.com/",
     "https://api.stackexchange.com/"
