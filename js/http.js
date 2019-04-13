@@ -129,7 +129,3 @@ axios.interceptors.response.use(function (response) {
     // Show error message.
     return Promise.reject(error);
 });
-
-// getAnswersForQuestion(54279317);
-
-// getQuestionHTML();
