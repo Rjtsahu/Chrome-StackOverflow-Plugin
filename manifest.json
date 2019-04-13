@@ -7,6 +7,7 @@
     "persistent": false
   },
   "permissions": [
+    "storage",
     "activeTab",
     "https://stackoverflow.com/",
     "https://api.stackexchange.com/"
