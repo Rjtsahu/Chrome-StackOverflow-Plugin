@@ -1,6 +1,8 @@
 
 $("#search-button").click(() => {
     let searchQuery = $('#search-input').val();
+    if(searchQuery === '') return;
+    
     initSearch(searchQuery);
 });
 

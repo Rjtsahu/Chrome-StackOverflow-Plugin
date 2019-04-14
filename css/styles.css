@@ -1,7 +1,16 @@
 body{
     min-width:600px;
-    min-height:200px;
-    background-color: rgb(223, 233, 247)
+    min-height:100px;
+    background-color: #7c8c9c;
+    padding: 20px 10px 10px 10px;
+}
+/*
+#search-header{
+    margin:20px 10px; 
+}
+*/
+#search-input{
+    color: white;
 }
 
 #previous-button{
@@ -10,7 +19,6 @@ body{
     top: 50%;
     left: 10px;
 }
-
 
 #next-button{
     position: fixed;
