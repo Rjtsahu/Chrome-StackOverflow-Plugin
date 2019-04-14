@@ -1,5 +1,28 @@
 body{
-    min-width:400px;
+    min-width:600px;
     min-height:200px;
     background-color: rgb(223, 233, 247)
+}
+
+#previous-button{
+    position: fixed;
+    bottom: 50%;
+    top: 50%;
+    left: 10px;
+}
+
+
+#next-button{
+    position: fixed;
+    bottom: 50%;
+    top: 50%;
+    right: 10px;
+}
+
+.navigation-button{
+    opacity: 0.3;
+}
+
+.navigation-button:hover{
+    opacity: 1;
 }

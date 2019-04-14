@@ -3,6 +3,10 @@
 <head>
 
     <title>Quick StackOverflow</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/materialize.css" />
 
@@ -25,22 +29,13 @@
         <div id="question-title">
             
         </div>
-        <div class="row">
-            <div class="col s1" id="previous-button">
-                &lt;
-            </div>
-            <div class="col s10 ">
-                <ul>
-                    <li>an item</li>
-                    <li>an item</li>
-                    <li>an item</li>
-                    <li>an item</li>
-                </ul>
-            </div>
-            <div class="col s1" id="next-button">
-                &gt;
-            </div>
-        </div>
+        
+        
+        <a class="btn-floating btn-large waves-effect waves-light red navigation-button" id ="previous-button">
+                <i class="material-icons">chevron_left</i></a>
+
+        <a class="btn-floating btn-large waves-effect waves-light red navigation-button" id= "next-button">
+                        <i class="material-icons">chevron_right</i></a>
     </div>
     <script type="text/javascript" src="./js/parser.js"></script>
     <script type="text/javascript" src="./js/http.js"></script>
