@@ -6,7 +6,7 @@ let DomFactory = () => {
         el.innerText = title;
     }
     this.showQuestionContent = (questionObject)=>{
-        $('#question-content').innerHTML = questionObject.inner_html;
+        document.getElementById('question-content').innerHTML = questionObject.inner_html;
     }
 
     this.toggleBlockVisibility = () => {
