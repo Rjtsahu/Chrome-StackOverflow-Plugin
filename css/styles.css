@@ -34,3 +34,21 @@ body{
 .navigation-button:hover{
     opacity: 1;
 }
+.after-search-header{
+    display:block;
+    padding:6px !important;
+    background-color:#546e7a;
+    box-shadow: 0px 0px 6px 1px #588186
+}
+#question-title{
+    display:block;
+    font-size:16px;
+    text-align: center;
+}
+#search-query{
+    display:block;
+    font-size:10px;
+}
+.block-hidden{
+    display: none;
+}
