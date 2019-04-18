@@ -100,6 +100,11 @@ Using similar style as used in SO.
     max-height: 300px;
     overflow: auto;
 }
+.answer-content h1,.answer-content h2,.answer-content h3,.answer-content h4,.answer-content h5,.answer-content h6{
+    font-size: 12px;
+    font-weight: 500;
+}
+
 /* 
 custom scrollbar
 */
