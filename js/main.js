@@ -1,8 +1,8 @@
 
 $("#search-button").click(() => {
     let searchQuery = $('#search-input').val();
-    if(searchQuery === '') return;
-    
+    if (searchQuery === '') return;
+
     initSearch(searchQuery);
 });
 
@@ -35,37 +35,42 @@ function SearchService(searchQuery) {
 
         info.currentPageIndex = 0;
         info.numberOfPages = results.length;
-        
-        if(results.length === 0){
-            console.log('no result ...')
-        }else{
+
+        if (results.length === 0) {
+            console.log('no result ...');
+            // show toast error.
+        } else {
+            document.getElementById('search-query').innerText = 'Result for ' + searchText;
             this.showPageResult(questions[0]);
+            // display answer div and hide search div
+            domFactory.toggleBlockVisibility();
         }
     }
 
     this.showPageResult = async (data) => {
-        console.log('result data: ',data);
+        console.log('result data: ', data);
         domFactory.showQuestionTitle(data.title);
         // get question details including html content of question and associated answers.
-        if(data.answer_fetched === false){
+        if (data.answer_fetched === false) {
             let questionDetail = await appendQuestionAndAnswerHTML(data);
             questionDetail.answer_fetched = true;
             results[info.currentPageIndex] = questionDetail;
         }
-
+        domFactory.showQuestionContent(results[info.currentPageIndex]);
+        domFactory.showAnswers(results[info.currentPageIndex].answers);
     }
 
     this.showNextPage = async () => {
         let currentIndex = info.currentPageIndex;
-        if (currentIndex >= info.numberOfPages -1) {
+        if (currentIndex >= info.numberOfPages - 1) {
             console.log('no more next pages...');
             return;
         }
 
-        let data = results[currentIndex+1];
+        let data = results[currentIndex + 1];
         this.showPageResult(data);
 
-            info.currentPageIndex +=1;
+        info.currentPageIndex += 1;
     }
 
     this.showPreviousPage = async () => {
@@ -75,10 +80,10 @@ function SearchService(searchQuery) {
             return;
         }
 
-        let data = results[currentIndex-1];
+        let data = results[currentIndex - 1];
         this.showPageResult(data)
-   
-        info.currentPageIndex -=1;
+
+        info.currentPageIndex -= 1;
     }
 }
 

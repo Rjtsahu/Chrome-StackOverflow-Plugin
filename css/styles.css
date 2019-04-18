@@ -34,3 +34,99 @@ body{
 .navigation-button:hover{
     opacity: 1;
 }
+.after-search-header{
+    display:block;
+    padding:6px !important;
+    background-color:#546e7a;
+    box-shadow: 0px 0px 6px 1px #588186
+}
+#question-title{
+    display:block;
+    font-size:16px;
+    text-align: center;
+}
+#search-query{
+    display:block;
+    font-size:10px;
+}
+.block-hidden{
+    display: none;
+}
+/* 
+styles for question/answer html from SO.
+Using similar style as used in SO.
+*/
+.answer-content p{
+    clear: both;
+    margin-bottom: 2px !important;
+    margin-top: 0 !important;
+    font-size: 10px;
+}
+
+.answer-content pre code{
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+    color: #ffff00 !important;
+    font-size: 12px !important;
+    max-width: 520px;
+    max-height: 300px;
+    overflow: auto;
+}
+.answer-content pre{
+    background-color:#000000 !important;
+    display: block;
+    padding:7px; 
+    max-width: 520px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+#question-content p{
+    clear: both;
+    margin-bottom: 2px !important;
+    margin-top: 0 !important;
+    font-size: 10px;
+}
+
+#question-content pre code{
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+    color: #000 !important;
+    font-size: 12px !important;
+}
+#question-content pre{
+    background-color:#fff !important;
+    display: block;
+    padding:7px; 
+    max-width: 520px;
+    max-height: 300px;
+    overflow: auto;
+}
+.answer-content h1,.answer-content h2,.answer-content h3,.answer-content h4,.answer-content h5,.answer-content h6{
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* 
+custom scrollbar
+*/
+/* width */
+ ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Track */
+ ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px;
+}
+   
+  /* Handle */
+ ::-webkit-scrollbar-thumb {
+    background: #512da8; 
+    border-radius: 5px;
+}
+  
+  /* Handle on hover */
+ ::-webkit-scrollbar-thumb:hover {
+    background: #311b92; 
+}

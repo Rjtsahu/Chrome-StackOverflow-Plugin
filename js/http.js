@@ -9,7 +9,7 @@ const MAX_QUESTION_PER_SEARCH = 5;
 const MAX_ANSWER_PER_QUESTION = 3;
 // including accepted answer or top 3 by votes
 
-const MIN_VOTES = 2;
+const MIN_VOTES = 0;
 const MAX_VOTES = 100000;
 const PAGE_SIZE = MAX_QUESTION_PER_SEARCH;
 
@@ -18,11 +18,11 @@ const PAGE_SIZE = MAX_QUESTION_PER_SEARCH;
 const searchQueryParameters = {
     site: 'stackoverflow',
     sort: 'votes',
- //   min: MIN_VOTES,
- //   max: MAX_VOTES,
+    min: MIN_VOTES,
+    max: MAX_VOTES,
     pagesize: PAGE_SIZE,
     key: '',
-    intitle: 'query string in url'
+  //  intitle: 'query string in url'
 }
 
 const parser = Parser();
@@ -30,12 +30,12 @@ const parser = Parser();
 async function getStackOverflowResults(searchQuery) {
 
     let searchCriteria = Object.assign({},searchQueryParameters);
-    searchCriteria.intitle = searchQuery;
+    searchCriteria.q = searchQuery;
 
     let result = [];
 
     try {
-        let searchRespoonse = await axios.get(API_BASE + 'search', { params: searchCriteria });
+        let searchRespoonse = await axios.get(API_BASE + 'search/advanced', { params: searchCriteria });
 
         searchRespoonse.data.items.forEach(question => {
             let questionObject = {
