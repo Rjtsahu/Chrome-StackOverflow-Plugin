@@ -75,6 +75,9 @@ Using similar style as used in SO.
     background-color:#000000 !important;
     display: block;
     padding:7px; 
+    max-width: 520px;
+    max-height: 300px;
+    overflow: auto;
 }
 
 #question-content p{
@@ -88,12 +91,37 @@ Using similar style as used in SO.
     font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
     color: #000 !important;
     font-size: 12px !important;
-    max-width: 520px;
-    max-height: 300px;
-    overflow: auto;
 }
 #question-content pre{
     background-color:#fff !important;
     display: block;
     padding:7px; 
+    max-width: 520px;
+    max-height: 300px;
+    overflow: auto;
+}
+/* 
+custom scrollbar
+*/
+/* width */
+ ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Track */
+ ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px;
+}
+   
+  /* Handle */
+ ::-webkit-scrollbar-thumb {
+    background: #512da8; 
+    border-radius: 5px;
+}
+  
+  /* Handle on hover */
+ ::-webkit-scrollbar-thumb:hover {
+    background: #311b92; 
 }
