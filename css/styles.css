@@ -52,3 +52,48 @@ body{
 .block-hidden{
     display: none;
 }
+/* 
+styles for question/answer html from SO.
+Using similar style as used in SO.
+*/
+.answer-content p{
+    clear: both;
+    margin-bottom: 2px !important;
+    margin-top: 0 !important;
+    font-size: 10px;
+}
+
+.answer-content pre code{
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+    color: #ffff00 !important;
+    font-size: 12px !important;
+    max-width: 520px;
+    max-height: 300px;
+    overflow: auto;
+}
+.answer-content pre{
+    background-color:#000000 !important;
+    display: block;
+    padding:7px; 
+}
+
+#question-content p{
+    clear: both;
+    margin-bottom: 2px !important;
+    margin-top: 0 !important;
+    font-size: 10px;
+}
+
+#question-content pre code{
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+    color: #000 !important;
+    font-size: 12px !important;
+    max-width: 520px;
+    max-height: 300px;
+    overflow: auto;
+}
+#question-content pre{
+    background-color:#fff !important;
+    display: block;
+    padding:7px; 
+}

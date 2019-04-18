@@ -26,6 +26,9 @@ let DomFactory = () => {
             const content = prepareAnswerDiv(answerObject);
             answerListDiv.appendChild(content);
         });
+        // set code heighlight using microlight
+        document.querySelectorAll('pre code').forEach(e=>{e.setAttribute('class','microlight');});
+        microlight.reset();
     }
 
     this.prepareAnswerDiv = (answerObject) => {
