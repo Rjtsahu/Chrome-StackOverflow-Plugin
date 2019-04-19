@@ -17,19 +17,17 @@ const PAGE_SIZE = MAX_QUESTION_PER_SEARCH;
 
 const searchQueryParameters = {
     site: 'stackoverflow',
-    sort: 'votes',
-    min: MIN_VOTES,
-    max: MAX_VOTES,
+    sort: 'relevance',
     pagesize: PAGE_SIZE,
     key: '',
-  //  intitle: 'query string in url'
+    //  intitle: 'query string in url'
 }
 
 const parser = Parser();
 
 async function getStackOverflowResults(searchQuery) {
 
-    let searchCriteria = Object.assign({},searchQueryParameters);
+    let searchCriteria = Object.assign({}, searchQueryParameters);
     searchCriteria.q = searchQuery;
 
     let result = [];
@@ -44,7 +42,7 @@ async function getStackOverflowResults(searchQuery) {
                 question_id: question.question_id,
                 answers: [],
                 answer_fetched: false,
-                inner_html:''
+                inner_html: ''
             }
 
             result.push(questionObject);
@@ -60,6 +58,8 @@ const questionQueryParameters = {
     site: 'stackoverflow',
     sort: 'votes',
     order: 'desc',
+    min: MIN_VOTES,
+    max: MAX_VOTES,
     key: ''
 }
 
@@ -91,25 +91,25 @@ async function getAnswersForQuestion(question_id, max_answers) {
 
     } catch (e) {
         console.log('error in question api: ', e);
-    }finally{
+    } finally {
         return result;
     }
 }
 
-async function appendQuestionAndAnswerHTML(questionDetail){
+async function appendQuestionAndAnswerHTML(questionDetail) {
     let result = questionDetail || {};
     //  get top answers from api
     questionDetail.answers = await getAnswersForQuestion(questionDetail.question_id);
     // get html page from question link
-    let {data} = await axios.get(questionDetail.link);
+    let { data } = await axios.get(questionDetail.link);
     questionDetail.inner_html = parser.getQuestionDivForQuestion(data);
-    
+
     // append htmls for all answers
-    questionDetail.answers.forEach(answer=>{
-        answer.inner_html = parser.getAnswerDivForQuestion(data,answer.answer_id);
+    questionDetail.answers.forEach(answer => {
+        answer.inner_html = parser.getAnswerDivForQuestion(data, answer.answer_id);
     });
 
-   return result;
+    return result;
 }
 
 function showQuotaError() {

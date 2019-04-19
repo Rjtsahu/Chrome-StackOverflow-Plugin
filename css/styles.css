@@ -60,7 +60,7 @@ Using similar style as used in SO.
     clear: both;
     margin-bottom: 2px !important;
     margin-top: 0 !important;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .answer-content pre code{
@@ -84,7 +84,7 @@ Using similar style as used in SO.
     clear: both;
     margin-bottom: 2px !important;
     margin-top: 0 !important;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 #question-content pre code{
@@ -101,10 +101,13 @@ Using similar style as used in SO.
     overflow: auto;
 }
 .answer-content h1,.answer-content h2,.answer-content h3,.answer-content h4,.answer-content h5,.answer-content h6{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
 }
-
+/*dont show images*/
+.answer-content img, #question-content img{
+    display: none;
+}
 /* 
 custom scrollbar
 */

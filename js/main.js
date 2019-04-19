@@ -38,6 +38,8 @@ function SearchService(searchQuery) {
 
         if (results.length === 0) {
             console.log('no result ...');
+            M.toast({html:'No Search result...'});
+
             // show toast error.
         } else {
             document.getElementById('search-query').innerText = 'Result for ' + searchText;
@@ -53,11 +55,12 @@ function SearchService(searchQuery) {
         // get question details including html content of question and associated answers.
         if (data.answer_fetched === false) {
             let questionDetail = await appendQuestionAndAnswerHTML(data);
+            data = questionDetail;
             questionDetail.answer_fetched = true;
             results[info.currentPageIndex] = questionDetail;
         }
-        domFactory.showQuestionContent(results[info.currentPageIndex]);
-        domFactory.showAnswers(results[info.currentPageIndex].answers);
+        domFactory.showQuestionContent(data);
+        domFactory.showAnswers(data.answers);
     }
 
     this.showNextPage = async () => {
