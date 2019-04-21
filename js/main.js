@@ -38,7 +38,6 @@ function SearchService(searchQuery) {
         info.numberOfPages = results.length;
 
         if (results.length === 0) {
-            console.log('no result ...');
             M.toast({ html: 'No Search result...' });
         } else {
             document.getElementById('search-query').innerText = 'Result for ' + searchText;
@@ -46,20 +45,6 @@ function SearchService(searchQuery) {
             domFactory.toggleBlockVisibility();
             domFactory.showQuestionCollapsible(questions);
         }
-    }
-
-    this.showPageResult = async (data) => {
-        console.log('result data: ', data);
-        domFactory.showQuestionTitle(data.title);
-        // get question details including html content of question and associated answers.
-        if (data.answer_fetched === false) {
-            let questionDetail = await appendQuestionAndAnswerHTML(data);
-            data = questionDetail;
-            questionDetail.answer_fetched = true;
-            results[info.currentPageIndex] = questionDetail;
-        }
-        domFactory.showQuestionContent(data);
-        domFactory.showAnswers(data.answers);
     }
 
     this.showQuestionContent = async (elementId, questionId) => {

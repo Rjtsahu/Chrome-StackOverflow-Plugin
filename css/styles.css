@@ -113,8 +113,8 @@ custom scrollbar
 */
 /* width */
  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
   }
   
   /* Track */
@@ -141,4 +141,17 @@ custom scrollbar
 
 .collapsible-body{
     padding: 2px !important; 
+    border-right: 2px solid #31424a !important;
+}
+
+.collapsible{
+    border: 0px !important;
+}
+
+.collapsible-item-content row {
+   margin-bottom: 0px !important; 
+}
+
+.collapsible-header{
+    box-shadow: 6px 6px 10px -4px black;
 }

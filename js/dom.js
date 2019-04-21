@@ -1,10 +1,5 @@
 let DomFactory = () => {
 
-	this.showQuestionTitle = (title) => {
-		let el = document.getElementById('question-title');
-		el.innerText = title;
-	}
-
 	this.showCollapsibleItem = function (questionObject, elementId) {
 		let el = document.getElementById(elementId);
 		`         <div class="card blue-grey darken-1">
@@ -20,7 +15,8 @@ let DomFactory = () => {
 		el.appendChild(questionCardElement);
 
 		el.appendChild(prepareAllAnswer(questionObject.answers));
-
+		
+		document.querySelectorAll('pre code').forEach(e=>{e.setAttribute('class','microlight');});
 		microlight.reset();
 	}
 
@@ -35,10 +31,6 @@ let DomFactory = () => {
 		})
 	}
 
-	this.showQuestionContent = (questionObject) => {
-		document.getElementById('question-content').innerHTML = questionObject.inner_html;
-	}
-
 	this.toggleBlockVisibility = () => {
 		$('#search-header').toggleClass('block-hidden');
 		$('#content-after-search').toggleClass('block-hidden');
@@ -49,25 +41,6 @@ let DomFactory = () => {
 		questions.forEach(question => {
 			collapsible.appendChild(prepareQuestionListItem(question));
 		});
-	}
-
-	this.showAnswers = (answers) => {
-		let answerListDiv = document.getElementById('answer-list');
-
-		// delete all child element if any...
-		while (answerListDiv.firstChild) {
-			answerListDiv.removeChild(answerListDiv.firstChild);
-		}
-
-		answers.forEach(answerObject => {
-			const content = prepareAnswerDiv(answerObject);
-			answerListDiv.appendChild(content);
-		});
-		// set code heighlight using microlight
-		document.querySelectorAll('pre code').forEach(e => {
-			e.setAttribute('class', 'microlight');
-		});
-		microlight.reset();
 	}
 
 	this.prepareAnswerDiv = (answerObject) => {
@@ -139,10 +112,7 @@ let DomFactory = () => {
 	}
 
 	return {
-		showQuestionTitle,
-		showQuestionContent,
 		showQuestionCollapsible,
-		showAnswers,
 		toggleBlockVisibility,
 		showCollapsibleItem
 	}
