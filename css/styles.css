@@ -56,14 +56,14 @@ body{
 styles for question/answer html from SO.
 Using similar style as used in SO.
 */
-.answer-content p{
+.answer-body p{
     clear: both;
     margin-bottom: 2px !important;
     margin-top: 0 !important;
     font-size: 13px;
 }
 
-.answer-content pre code{
+.answer-body pre code{
     font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
     color: #ffff00 !important;
     font-size: 12px !important;
@@ -71,7 +71,7 @@ Using similar style as used in SO.
     max-height: 300px;
     overflow: auto;
 }
-.answer-content pre{
+.answer-body pre{
     background-color:#000000 !important;
     display: block;
     padding:7px; 
@@ -80,19 +80,19 @@ Using similar style as used in SO.
     overflow: auto;
 }
 
-#question-content p{
+.question-body p{
     clear: both;
     margin-bottom: 2px !important;
     margin-top: 0 !important;
     font-size: 13px;
 }
 
-#question-content pre code{
+.question-body pre code{
     font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
     color: #000 !important;
     font-size: 12px !important;
 }
-#question-content pre{
+.question-body pre{
     background-color:#fff !important;
     display: block;
     padding:7px; 
@@ -100,12 +100,12 @@ Using similar style as used in SO.
     max-height: 300px;
     overflow: auto;
 }
-.answer-content h1,.answer-content h2,.answer-content h3,.answer-content h4,.answer-content h5,.answer-content h6{
+.answer-body h1,.answer-body h2,.answer-body h3,.answer-body h4,.answer-body h5,.answer-body h6{
     font-size: 14px;
     font-weight: 500;
 }
 /*dont show images*/
-.answer-content img, #question-content img{
+.answer-body img, .question-body img{
     display: none;
 }
 /* 
@@ -132,4 +132,13 @@ custom scrollbar
   /* Handle on hover */
  ::-webkit-scrollbar-thumb:hover {
     background: #311b92; 
+}
+
+/*styles based on collapsible design*/
+.question-title{
+    font-size: 16px;
+}
+
+.collapsible-body{
+    padding: 2px !important; 
 }

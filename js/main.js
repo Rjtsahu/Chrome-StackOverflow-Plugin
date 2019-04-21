@@ -19,11 +19,12 @@ function initSearch(searchQuery) {
 
 function SearchService(searchQuery) {
 
-    let info = {
+    const info = {
         currentPageIndex: 0,
+        currentQuestionIndex: 0,
         numberOfPages: 0
     }
-    let searchText = searchQuery;
+    const searchText = searchQuery;
     let results = []
 
     this.init = async function () {
@@ -38,12 +39,9 @@ function SearchService(searchQuery) {
 
         if (results.length === 0) {
             console.log('no result ...');
-            M.toast({html:'No Search result...'});
-
-            // show toast error.
+            M.toast({ html: 'No Search result...' });
         } else {
             document.getElementById('search-query').innerText = 'Result for ' + searchText;
-            this.showPageResult(questions[0]);
             // display answer div and hide search div
             domFactory.toggleBlockVisibility();
             domFactory.showQuestionCollapsible(questions);
@@ -64,46 +62,54 @@ function SearchService(searchQuery) {
         domFactory.showAnswers(data.answers);
     }
 
-    this.showNextPage = async () => {
-        let currentIndex = info.currentPageIndex;
-        if (currentIndex >= info.numberOfPages - 1) {
-            console.log('no more next pages...');
-            return;
+    this.showQuestionContent = async (elementId, questionId) => {
+        let index = this.findIndexByQuestionId(questionId);
+        info.currentQuestionIndex = index;
+
+        let data = results[index];
+
+        // get question details including html content of question and associated answers.
+        if (data.answer_fetched === false) {
+            let questionDetail = await appendQuestionAndAnswerHTML(data);
+            data = questionDetail;
+            questionDetail.answer_fetched = true;
+            results[index] = questionDetail;
+
+           domFactory.showCollapsibleItem(data, elementId);
         }
 
-        let data = results[currentIndex + 1];
-        this.showPageResult(data);
-
-        info.currentPageIndex += 1;
     }
 
-    this.showPreviousPage = async () => {
-        let currentIndex = info.currentPageIndex;
-        if (currentIndex <= 0) {
-            console.log('no more previous pages...');
-            return;
+    this.findIndexByQuestionId = (questionId) => {
+
+        for (var i = 0; i < results.length; i++) {
+            if (results[i].question_id === questionId) {
+                return i;
+            }
         }
-
-        let data = results[currentIndex - 1];
-        this.showPageResult(data)
-
-        info.currentPageIndex -= 1;
+        return -1;
     }
 }
 
-SearchService.prototype.onPrevious = function () {
-    console.log('onPrevious');
-    if (searchService) {
-        searchService.showPreviousPage();
-    }
-}
 
-SearchService.prototype.onNext = function () {
-    console.log('onNext');
-    if (searchService) {
-        searchService.showNextPage();
-    }
-}
+// init collapsible 
+document.addEventListener('DOMContentLoaded', function () {
 
-$("#previous-button").click(SearchService.prototype.onPrevious);
-$("#next-button").click(SearchService.prototype.onNext);
+    /// setup event handler
+    let options = {
+        onOpenStart: (el) => {
+            console.log('onOpenStart');
+            let elementId = el.getElementsByClassName('collapsible-item-content')[0].getAttribute('id');
+            let questionId = parseInt(elementId.split('-')[1]);
+            searchService && searchService.showQuestionContent(elementId, questionId);
+        },
+        onCloseStart: (el) => {
+            console.log('onCloseStart');
+        }
+    }
+
+    let elem = document.querySelector('.collapsible');
+    M.Collapsible.init(elem, options);
+
+});
+
