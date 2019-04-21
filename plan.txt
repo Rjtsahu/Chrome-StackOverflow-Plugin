@@ -1,0 +1,16 @@
+// create a better search / view algorithm over search result from stackoverflow api
+
+Algorithm :
+
+Assuming constants : max_question = 5 , max_answer =5
+
+1) Get 2 * max_question from search api with sorted by 'relevance'
+2) create a list most_relavent_answer, add all accepted answer_id in this list
+3) Create sorting score for question associated with most_relavent_answer.
+4) This score will be calculated based on 'Number of exact word match' of question and search query.
+5) Formula (no of word matched in question)/(no of word in search query) so score has value from 0 to 1
+6) if two question have same score then sort them on based of 'answer score from stack overflow api'.
+7) Filter question which have no answers.
+
+How to show most_relavent_answer ?
+1) May be in collaplsible the sorting will be on this order ... and first answer will be from here 
