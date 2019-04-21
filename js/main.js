@@ -46,6 +46,7 @@ function SearchService(searchQuery) {
             this.showPageResult(questions[0]);
             // display answer div and hide search div
             domFactory.toggleBlockVisibility();
+            domFactory.showQuestionCollapsible(questions);
         }
     }
 
