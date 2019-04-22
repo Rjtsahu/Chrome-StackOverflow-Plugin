@@ -14,16 +14,20 @@ function initSearch(searchQuery) {
 
     searchService = new SearchService(searchQuery);
 
+  //  domFactory.showLoader();
     searchService.init();
+  //  domFactory.hideLoader();
+
 }
 
 function SearchService(searchQuery) {
 
-    let info = {
+    const info = {
         currentPageIndex: 0,
+        currentQuestionIndex: 0,
         numberOfPages: 0
     }
-    let searchText = searchQuery;
+    const searchText = searchQuery;
     let results = []
 
     this.init = async function () {
@@ -37,69 +41,66 @@ function SearchService(searchQuery) {
         info.numberOfPages = results.length;
 
         if (results.length === 0) {
-            console.log('no result ...');
-            // show toast error.
+            M.toast({ html: 'No Search result...' });
         } else {
             document.getElementById('search-query').innerText = 'Result for ' + searchText;
-            this.showPageResult(questions[0]);
             // display answer div and hide search div
             domFactory.toggleBlockVisibility();
+            domFactory.showQuestionCollapsible(questions);
         }
     }
 
-    this.showPageResult = async (data) => {
-        console.log('result data: ', data);
-        domFactory.showQuestionTitle(data.title);
+    this.showQuestionContent = async (elementId, questionId) => {
+        let index = this.findIndexByQuestionId(questionId);
+        info.currentQuestionIndex = index;
+
+        let data = results[index];
         // get question details including html content of question and associated answers.
         if (data.answer_fetched === false) {
             let questionDetail = await appendQuestionAndAnswerHTML(data);
+            data = questionDetail;
             questionDetail.answer_fetched = true;
-            results[info.currentPageIndex] = questionDetail;
+            results[index] = questionDetail;
+
+           domFactory.showCollapsibleItem(data, elementId);
         }
-        domFactory.showQuestionContent(results[info.currentPageIndex]);
-        domFactory.showAnswers(results[info.currentPageIndex].answers);
+
     }
 
-    this.showNextPage = async () => {
-        let currentIndex = info.currentPageIndex;
-        if (currentIndex >= info.numberOfPages - 1) {
-            console.log('no more next pages...');
-            return;
+    this.findIndexByQuestionId = (questionId) => {
+
+        for (var i = 0; i < results.length; i++) {
+            if (results[i].question_id === questionId) {
+                return i;
+            }
         }
-
-        let data = results[currentIndex + 1];
-        this.showPageResult(data);
-
-        info.currentPageIndex += 1;
-    }
-
-    this.showPreviousPage = async () => {
-        let currentIndex = info.currentPageIndex;
-        if (currentIndex <= 0) {
-            console.log('no more previous pages...');
-            return;
-        }
-
-        let data = results[currentIndex - 1];
-        this.showPageResult(data)
-
-        info.currentPageIndex -= 1;
+        return -1;
     }
 }
 
-SearchService.prototype.onPrevious = function () {
-    console.log('onPrevious');
-    if (searchService) {
-        searchService.showPreviousPage();
-    }
-}
 
-SearchService.prototype.onNext = function () {
-    console.log('onNext');
-    if (searchService) {
-        searchService.showNextPage();
-    }
-}
+// init collapsible 
+document.addEventListener('DOMContentLoaded', function () {
 
-$("#previous-button").click(SearchService.prototype.onPrevious);
-$("#next-button").click(SearchService.prototype.onNext);
+    /// setup event handler
+    let options = {
+        onOpenStart: async (el) => {
+            console.log('onOpenStart');
+            domFactory.showLoader();
+            let elementId = el.getElementsByClassName('collapsible-item-content')[0].getAttribute('id');
+            let questionId = parseInt(elementId.split('-')[1]);
+            if(searchService){
+               await searchService.showQuestionContent(elementId, questionId);
+            } 
+            domFactory.hideLoader();
+        },
+        onCloseStart: (el) => {
+            console.log('onCloseStart');
+        }
+    }
+
+    let elem = document.querySelector('.collapsible');
+    M.Collapsible.init(elem, options);
+
+});
+
