@@ -15,8 +15,8 @@ let DomFactory = () => {
 		el.appendChild(questionCardElement);
 
 		el.appendChild(prepareAllAnswer(questionObject.answers));
-		
-		document.querySelectorAll('pre code').forEach(e=>{e.setAttribute('class','microlight');});
+
+		document.querySelectorAll('pre code').forEach(e => { e.setAttribute('class', 'microlight'); });
 		microlight.reset();
 	}
 
@@ -111,9 +111,27 @@ let DomFactory = () => {
 		return mElement;
 	}
 
+	this.showLoader = () => {
+		let loaderEl = document.getElementById('loader');
+		if(loaderEl === null){
+			document.getElementById('container').appendChild(createElement('div', {
+				classList: ['loader'],
+				id: 'loader'
+			}));
+		}
+	}
+
+	this.hideLoader = () => {
+		let loaderEl = document.getElementById('loader');
+		if (loaderEl) {
+			document.getElementById('container').removeChild(document.getElementById('loader'));
+		}
+	}
 	return {
 		showQuestionCollapsible,
 		toggleBlockVisibility,
-		showCollapsibleItem
+		showCollapsibleItem,
+		showLoader,
+		hideLoader
 	}
 }

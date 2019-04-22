@@ -14,7 +14,10 @@ function initSearch(searchQuery) {
 
     searchService = new SearchService(searchQuery);
 
+  //  domFactory.showLoader();
     searchService.init();
+  //  domFactory.hideLoader();
+
 }
 
 function SearchService(searchQuery) {
@@ -84,9 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let options = {
         onOpenStart: (el) => {
             console.log('onOpenStart');
+            domFactory.showLoader();
             let elementId = el.getElementsByClassName('collapsible-item-content')[0].getAttribute('id');
             let questionId = parseInt(elementId.split('-')[1]);
             searchService && searchService.showQuestionContent(elementId, questionId);
+            domFactory.hideLoader();
         },
         onCloseStart: (el) => {
             console.log('onCloseStart');

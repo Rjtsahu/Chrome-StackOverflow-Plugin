@@ -155,3 +155,23 @@ custom scrollbar
 .collapsible-header{
     box-shadow: 6px 6px 10px -4px black;
 }
+
+/*custom loader */
+
+.loader {
+    border: 8px solid #f3f3f3c4;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s ease-in-out infinite;
+    position: fixed;
+    right: 50%;
+    top: 20px;
+    z-index: 9999;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
