@@ -55,7 +55,6 @@ function SearchService(searchQuery) {
         info.currentQuestionIndex = index;
 
         let data = results[index];
-
         // get question details including html content of question and associated answers.
         if (data.answer_fetched === false) {
             let questionDetail = await appendQuestionAndAnswerHTML(data);
@@ -85,12 +84,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /// setup event handler
     let options = {
-        onOpenStart: (el) => {
+        onOpenStart: async (el) => {
             console.log('onOpenStart');
             domFactory.showLoader();
             let elementId = el.getElementsByClassName('collapsible-item-content')[0].getAttribute('id');
             let questionId = parseInt(elementId.split('-')[1]);
-            searchService && searchService.showQuestionContent(elementId, questionId);
+            if(searchService){
+               await searchService.showQuestionContent(elementId, questionId);
+            } 
             domFactory.hideLoader();
         },
         onCloseStart: (el) => {
