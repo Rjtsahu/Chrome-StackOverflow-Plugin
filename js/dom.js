@@ -114,7 +114,7 @@ let DomFactory = () => {
 	this.showLoader = () => {
 		let loaderEl = document.getElementById('loader');
 		if(loaderEl === null){
-			document.getElementById('container').appendChild(createElement('div', {
+			document.getElementById('git').appendChild(createElement('div', {
 				classList: ['loader'],
 				id: 'loader'
 			}));
