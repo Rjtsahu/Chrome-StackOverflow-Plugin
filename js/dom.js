@@ -127,11 +127,21 @@ let DomFactory = () => {
 			document.getElementById('container').removeChild(document.getElementById('loader'));
 		}
 	}
+	this.removeCollapsibleContent = ()=>{
+		let collapsibleContainer = document.getElementById('collapsible-content');
+		let childEl = collapsibleContainer.firstElementChild;
+		while(childEl){
+			collapsibleContainer.removeChild(childEl);
+			childEl = collapsibleContainer.firstElementChild;
+		}
+	}
+
 	return {
 		showQuestionCollapsible,
 		toggleBlockVisibility,
 		showCollapsibleItem,
 		showLoader,
-		hideLoader
+		hideLoader,
+		removeCollapsibleContent
 	}
 }

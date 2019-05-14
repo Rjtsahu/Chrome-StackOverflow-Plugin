@@ -9,14 +9,14 @@ $("#search-button").click(() => {
 let searchService;
 const domFactory = DomFactory();
 
-function initSearch(searchQuery) {
+async function initSearch(searchQuery) {
     console.log('searched :', searchQuery);
 
     searchService = new SearchService(searchQuery);
 
-  //  domFactory.showLoader();
-    searchService.init();
-  //  domFactory.hideLoader();
+    domFactory.showLoader();
+    await searchService.init();
+    domFactory.hideLoader();
 
 }
 
@@ -102,5 +102,18 @@ document.addEventListener('DOMContentLoaded', function () {
     let elem = document.querySelector('.collapsible');
     M.Collapsible.init(elem, options);
 
+    var fabElem = document.querySelector('.fixed-action-btn');
+    M.FloatingActionButton.init(fabElem, {
+      direction: 'left',
+      hoverEnabled: true
+    });
 });
 
+/// action for fab buttons
+$("#button-back").click(()=>{
+    if(searchService){
+        domFactory.toggleBlockVisibility();
+        domFactory.removeCollapsibleContent();
+        searchService = undefined;
+    }
+});

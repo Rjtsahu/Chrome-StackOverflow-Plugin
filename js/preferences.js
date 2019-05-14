@@ -24,7 +24,8 @@ const defaultSettings = {
     MAX_ANSWER_PER_QUESTION: 3,
     MIN_VOTES: 2,
     MAX_VOTES: 10000,
-    API_KEY: ''
+    API_KEY: '',
+    isOpenModePopUp:true
 }
 
 const Preferences = {
