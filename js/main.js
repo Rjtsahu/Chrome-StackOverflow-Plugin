@@ -111,8 +111,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /// action for fab buttons
 $("#button-back").click(()=>{
-    domFactory.toggleBlockVisibility();
     if(searchService){
-        delete searchService;
+        domFactory.toggleBlockVisibility();
+        domFactory.removeCollapsibleContent();
+        searchService = undefined;
     }
 });

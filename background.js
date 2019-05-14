@@ -2,6 +2,7 @@
 console.log('background script running...')
 
 const HOME_PAGE = 'home.html';
+const appId =  chrome.app.getDetails().id;
 
 async function setDefaultSetting() {
     // set default settting if its a first run...
@@ -23,15 +24,9 @@ function setOpenMode(isPopup){
     }
 }
 
-function browserActionClick(){
-    
-   const appId =  chrome.app.getDetails().id;
-
-   chrome.browserAction.onClicked.addListener(function(activeTab){
-    var url = `chrome-extension://${appId}/${HOME_PAGE}`;
-    chrome.tabs.create({ url: url });
-  });
-}
+chrome.browserAction.onClicked.addListener(function(activeTab){
+var url = `chrome-extension://${appId}/${HOME_PAGE}`;
+chrome.tabs.create({ url: url });
+});
 
 setDefaultSetting();
-browserActionClick();
