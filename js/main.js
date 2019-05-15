@@ -10,7 +10,6 @@ let searchService;
 const domFactory = DomFactory();
 
 async function initSearch(searchQuery) {
-    console.log('searched :', searchQuery);
 
     searchService = new SearchService(searchQuery);
 
@@ -34,10 +33,7 @@ function SearchService(searchQuery) {
     let results = []
 
     this.init = async function () {
-        console.log('inside init searchText:', searchText);
         const questions = await getStackOverflowResults(searchText);
-        console.log('questions : ', questions);
-
         results = Object.assign([], questions);
 
         info.currentPageIndex = 0;
@@ -88,7 +84,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     /// setup event handler
     let options = {
         onOpenStart: async (el) => {
-            console.log('onOpenStart');
             domFactory.showLoader();
             let elementId = el.getElementsByClassName('collapsible-item-content')[0].getAttribute('id');
             let questionId = parseInt(elementId.split('-')[1]);
@@ -96,9 +91,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 await searchService.showQuestionContent(elementId, questionId);
             }
             domFactory.hideLoader();
-        },
-        onCloseStart: (el) => {
-            console.log('onCloseStart');
         }
     }
 
