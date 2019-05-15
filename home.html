@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/materialize.css" />
 
-   <script src="./js/lib/jquery-3.3.1.min.js"></script>
+    <script src="./js/lib/jquery-3.3.1.min.js"></script>
     <script src="./js/lib/materialize.min.js"></script>
     <script src="./js/lib/axios.min.js"></script>
 
@@ -26,7 +26,10 @@
                     <div class="card blue-grey darken-1">
                         <div class="card-content white-text">
                             <span class="card-title"> Chrome Stack Search</span>
-                            <input type="text" id="search-input" placeholder="Stuck in a problem? Search here !!!" />
+                            <div class="input-field">
+                                <input type="text" id="search-input" placeholder="Stuck in a problem? Search here !!!"
+                                    class="autocomplete" />
+                            </div>
                         </div>
                         <div class="card-action">
                             <button type="button" class="waves-effect waves-light btn-small"
@@ -37,7 +40,7 @@
             </div>
 
         </div>
-          
+
         <div id="content-after-search" class="block-hidden">
             <div class="row" style="margin-bottom: 0px;">
                 <div class="col s12">
@@ -54,16 +57,28 @@
     </div>
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large red">
-          <i class="large material-icons">list</i>
+            <i class="large material-icons">list</i>
         </a>
         <ul>
-          <li><a class="btn-floating  red"><i class="material-icons" id="button-back">arrow_back_ios</i></a></li>
-          <li><a class="btn-floating  yellow darken-1" id="button-setting"><i class="material-icons">settings</i></a></li>
-          <li><a class="btn-floating  green" id="button-bookmark"><i class="material-icons">bookmark</i></a></li>
-          
+            <li><a class="btn-floating  red"><i class="material-icons" id="button-back">arrow_back_ios</i></a></li>
+            <li><a class="btn-floating  yellow darken-1" id="button-setting"><i class="material-icons">settings</i></a>
+            </li>
+            <li><a class="btn-floating green modal-trigger" id="button-bookmark" href="#modal-recent-search"><i
+                        class="material-icons">bookmark</i></a></li>
+
         </ul>
-      </div>
+    </div>
+    <!-- Modal Recent Searches -->
+    <div id="modal-recent-search" class="modal">
+        <div class="modal-content">
+            <h5>Recent Search</h5>
+
+            <ul class="collection" id = "recent-search-collection">
+              </ul>
+        </div>
+    </div>
     <script type="text/javascript" src="./js/parser.js"></script>
+    <script type="text/javascript" src="./js/preferences.js"></script>
     <script type="text/javascript" src="./js/http.js"></script>
     <script type="text/javascript" src="./js/dom.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>

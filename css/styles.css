@@ -183,3 +183,7 @@ custom scrollbar
   .fixed-action-btn:hover{
       opacity: 1.0;
   }
+
+  .collection .collection-item{
+      font-size: 14px !important;
+  }

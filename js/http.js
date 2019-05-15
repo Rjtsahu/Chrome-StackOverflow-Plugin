@@ -86,7 +86,6 @@ async function getAnswersForQuestion(question_id, max_answers) {
             };
 
             result.push(answerObject);
-            console.log('answerObj', answerObject);
         });
 
     } catch (e) {
@@ -119,7 +118,6 @@ function showQuotaError() {
 /// setup response interseptor
 axios.interceptors.response.use(function (response) {
     // show error message saying daily quota limit finisted.
-    console.log(response, 'response')
     if (response.data && response.data.quota_remaining === 0) {
         showQuotaError();
         return Promise.reject('daily api quota finished.');

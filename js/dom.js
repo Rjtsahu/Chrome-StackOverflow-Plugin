@@ -82,7 +82,41 @@ let DomFactory = () => {
 
 	}
 
-	this.createElement = (tagName, options) => {
+	this.showLoader = () => {
+		let loaderEl = document.getElementById('loader');
+		if (loaderEl === null) {
+			document.getElementById('container').appendChild(createElement('div', {
+				classList: ['loader'],
+				id: 'loader'
+			}));
+		}
+	}
+
+	this.hideLoader = () => {
+		let loaderEl = document.getElementById('loader');
+		if (loaderEl) {
+			document.getElementById('container').removeChild(document.getElementById('loader'));
+		}
+	}
+
+	this.removeCollapsibleContent = () => {
+		removeChildrenElements('collapsible-content');
+	}
+
+	this.showRecentSearchItems = (items) => {
+		let el = document.getElementById('recent-search-collection');
+		removeChildrenElements(el);
+		
+		items.forEach(item => {
+			el.appendChild(createElement('li', {
+				classList: ['collection-item'],
+				child: item
+			}));
+		});
+	}
+
+	
+	function createElement (tagName, options) {
 		options = options || {};
 		let mElement = document.createElement(tagName);
 
@@ -111,28 +145,17 @@ let DomFactory = () => {
 		return mElement;
 	}
 
-	this.showLoader = () => {
-		let loaderEl = document.getElementById('loader');
-		if(loaderEl === null){
-			document.getElementById('container').appendChild(createElement('div', {
-				classList: ['loader'],
-				id: 'loader'
-			}));
-		}
-	}
+	function removeChildrenElements(containerElement) {
+		if (containerElement && (typeof containerElement === 'string' || containerElement.nodeType === Node.ELEMENT_NODE)) {
+			if (typeof containerElement === 'string') {
+				containerElement = document.getElementById(containerElement);
+			}
 
-	this.hideLoader = () => {
-		let loaderEl = document.getElementById('loader');
-		if (loaderEl) {
-			document.getElementById('container').removeChild(document.getElementById('loader'));
-		}
-	}
-	this.removeCollapsibleContent = ()=>{
-		let collapsibleContainer = document.getElementById('collapsible-content');
-		let childEl = collapsibleContainer.firstElementChild;
-		while(childEl){
-			collapsibleContainer.removeChild(childEl);
-			childEl = collapsibleContainer.firstElementChild;
+			let childEl = containerElement.firstElementChild;
+			while (childEl) {
+				containerElement.removeChild(childEl);
+				childEl = containerElement.firstElementChild;
+			}
 		}
 	}
 
@@ -142,6 +165,7 @@ let DomFactory = () => {
 		showCollapsibleItem,
 		showLoader,
 		hideLoader,
-		removeCollapsibleContent
+		removeCollapsibleContent,
+		showRecentSearchItems
 	}
 }

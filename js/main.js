@@ -10,12 +10,14 @@ let searchService;
 const domFactory = DomFactory();
 
 async function initSearch(searchQuery) {
-    console.log('searched :', searchQuery);
 
     searchService = new SearchService(searchQuery);
 
     domFactory.showLoader();
+
+    Preferences.addAutoCompleteItem(searchQuery);
     await searchService.init();
+
     domFactory.hideLoader();
 
 }
@@ -31,10 +33,7 @@ function SearchService(searchQuery) {
     let results = []
 
     this.init = async function () {
-        console.log('inside init searchText:', searchText);
         const questions = await getStackOverflowResults(searchText);
-        console.log('questions : ', questions);
-
         results = Object.assign([], questions);
 
         info.currentPageIndex = 0;
@@ -62,7 +61,7 @@ function SearchService(searchQuery) {
             questionDetail.answer_fetched = true;
             results[index] = questionDetail;
 
-           domFactory.showCollapsibleItem(data, elementId);
+            domFactory.showCollapsibleItem(data, elementId);
         }
 
     }
@@ -80,40 +79,68 @@ function SearchService(searchQuery) {
 
 
 // init collapsible 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
     /// setup event handler
     let options = {
         onOpenStart: async (el) => {
-            console.log('onOpenStart');
             domFactory.showLoader();
             let elementId = el.getElementsByClassName('collapsible-item-content')[0].getAttribute('id');
             let questionId = parseInt(elementId.split('-')[1]);
-            if(searchService){
-               await searchService.showQuestionContent(elementId, questionId);
-            } 
+            if (searchService) {
+                await searchService.showQuestionContent(elementId, questionId);
+            }
             domFactory.hideLoader();
-        },
-        onCloseStart: (el) => {
-            console.log('onCloseStart');
         }
     }
 
     let elem = document.querySelector('.collapsible');
     M.Collapsible.init(elem, options);
 
-    var fabElem = document.querySelector('.fixed-action-btn');
+    let fabElem = document.querySelector('.fixed-action-btn');
     M.FloatingActionButton.init(fabElem, {
-      direction: 'left',
-      hoverEnabled: true
+        direction: 'left',
+        hoverEnabled: true
     });
+
+    /// initialization for autocomplete
+
+    let autocompleteElem = document.querySelector('.autocomplete');
+    let autoCompleteOptions = { limit: 3 };
+    M.Autocomplete.init(autocompleteElem, autoCompleteOptions);
+    updateAutoCompleteData();
+
+    /// initialization for bookmark modal popup
+    let modalOptions = {
+        onOpenStart : async ()=>{
+            let searchedTerms = await Preferences.getAutoCompleteItems();
+            searchedTerms = searchedTerms.reverse();
+            domFactory.showRecentSearchItems(searchedTerms);
+        }
+    }
+    let modalElem = document.getElementById('modal-recent-search');
+    M.Modal.init(modalElem,modalOptions);
 });
 
 /// action for fab buttons
-$("#button-back").click(()=>{
-    if(searchService){
+$("#button-back").click(() => {
+    if (searchService) {
         domFactory.toggleBlockVisibility();
         domFactory.removeCollapsibleContent();
+        updateAutoCompleteData();
         searchService = undefined;
     }
 });
+
+async function updateAutoCompleteData() {
+    let elem = document.querySelector('.autocomplete');
+    let instance = M.Autocomplete.getInstance(elem);
+    let autoCompleteData = {};
+    let autoCompleteItems = await Preferences.getAutoCompleteItems();
+
+    autoCompleteItems.forEach(item => {
+        autoCompleteData[item] = null;
+    });
+
+    instance.updateData(autoCompleteData);
+}
