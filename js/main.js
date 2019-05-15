@@ -117,6 +117,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     let autoCompleteOptions = { limit: 3 };
     M.Autocomplete.init(autocompleteElem, autoCompleteOptions);
     updateAutoCompleteData();
+
+    /// initialization for bookmark modal popup
+    let modalOptions = {
+        onOpenStart : async ()=>{
+            let searchedTerms = await Preferences.getAutoCompleteItems();
+            searchedTerms = searchedTerms.reverse();
+            domFactory.showRecentSearchItems(searchedTerms);
+        }
+    }
+    let modalElem = document.getElementById('modal-recent-search');
+    M.Modal.init(modalElem,modalOptions);
 });
 
 /// action for fab buttons

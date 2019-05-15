@@ -136,12 +136,22 @@ let DomFactory = () => {
 		}
 	}
 
+	this.showRecentSearchItems = (items)=>{
+		let el = document.getElementById('recent-search-collection');
+		items.forEach(item=>{
+			el.appendChild(createElement('li',{
+				classList:['collection-item'],
+				child:item
+			}));
+		});
+	}
 	return {
 		showQuestionCollapsible,
 		toggleBlockVisibility,
 		showCollapsibleItem,
 		showLoader,
 		hideLoader,
-		removeCollapsibleContent
+		removeCollapsibleContent,
+		showRecentSearchItems
 	}
 }
