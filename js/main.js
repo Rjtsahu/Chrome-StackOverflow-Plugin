@@ -15,7 +15,10 @@ async function initSearch(searchQuery) {
     searchService = new SearchService(searchQuery);
 
     domFactory.showLoader();
+
+    Preferences.addAutoCompleteItem(searchQuery);
     await searchService.init();
+
     domFactory.hideLoader();
 
 }
@@ -62,7 +65,7 @@ function SearchService(searchQuery) {
             questionDetail.answer_fetched = true;
             results[index] = questionDetail;
 
-           domFactory.showCollapsibleItem(data, elementId);
+            domFactory.showCollapsibleItem(data, elementId);
         }
 
     }
@@ -80,7 +83,7 @@ function SearchService(searchQuery) {
 
 
 // init collapsible 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
     /// setup event handler
     let options = {
@@ -89,9 +92,9 @@ document.addEventListener('DOMContentLoaded', function () {
             domFactory.showLoader();
             let elementId = el.getElementsByClassName('collapsible-item-content')[0].getAttribute('id');
             let questionId = parseInt(elementId.split('-')[1]);
-            if(searchService){
-               await searchService.showQuestionContent(elementId, questionId);
-            } 
+            if (searchService) {
+                await searchService.showQuestionContent(elementId, questionId);
+            }
             domFactory.hideLoader();
         },
         onCloseStart: (el) => {
@@ -102,18 +105,39 @@ document.addEventListener('DOMContentLoaded', function () {
     let elem = document.querySelector('.collapsible');
     M.Collapsible.init(elem, options);
 
-    var fabElem = document.querySelector('.fixed-action-btn');
+    let fabElem = document.querySelector('.fixed-action-btn');
     M.FloatingActionButton.init(fabElem, {
-      direction: 'left',
-      hoverEnabled: true
+        direction: 'left',
+        hoverEnabled: true
     });
+
+    /// initialization for autocomplete
+
+    let autocompleteElem = document.querySelector('.autocomplete');
+    let autoCompleteOptions = { limit: 3 };
+    M.Autocomplete.init(autocompleteElem, autoCompleteOptions);
+    updateAutoCompleteData();
 });
 
 /// action for fab buttons
-$("#button-back").click(()=>{
-    if(searchService){
+$("#button-back").click(() => {
+    if (searchService) {
         domFactory.toggleBlockVisibility();
         domFactory.removeCollapsibleContent();
+        updateAutoCompleteData();
         searchService = undefined;
     }
 });
+
+async function updateAutoCompleteData() {
+    let elem = document.querySelector('.autocomplete');
+    let instance = M.Autocomplete.getInstance(elem);
+    let autoCompleteData = {};
+    let autoCompleteItems = await Preferences.getAutoCompleteItems();
+
+    autoCompleteItems.forEach(item => {
+        autoCompleteData[item] = null;
+    });
+
+    instance.updateData(autoCompleteData);
+}
