@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./css/materialize.css" />
+
+    <script src="./js/lib/jquery-3.3.1.min.js"></script>
+    <script src="./js/lib/materialize.min.js"></script>
+    <script src="./js/lib/axios.min.js"></script>
+
+    <style>
+        .row {
+            margin-bottom: 0px !important;
+        }
+
+        form {
+            margin-block-end: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12 m6 offset-m3 l6 offset-l3">
+                <div class="card grey white-text">
+
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12 card-title blue darken-2" style="padding:10px;text-align: center;">
+                                Configure Settings
+                            </div>
+                        </div>
+
+                        <div class="row white">
+                            <div class="col s12">
+
+                                <form>
+                                    <div class="row">
+                                        <div class="input-field col s12 ">
+                                            <input type="number" id="maxQuestions" class="validate">
+                                            <label for="maxQuestions">Max number of questions. </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input type="number" id="maxAnswers">
+                                            <label for="maxQuestions">Max number of answers.</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input type="number" id="maxVotes">
+                                            <label for="maxQuestions">Maximum votes in results.</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input type="number" id="minVotes">
+                                            <label for="maxQuestions">Minimum votes in results.</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input type="text" id="apiKey">
+                                            <label for="maxQuestions">StackOverflow API key.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <p>
+                                                <label>
+                                                    <input type="checkbox" id="isPopMode" />
+                                                    <span>Open In Popup ?</span>
+                                                </label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <a class=" col s12 waves-effect waves-light btn">Update</a>
+                                        <a class=" col s12 waves-effect waves-light btn grey darken-1">Reset to
+                                            defaults</a>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

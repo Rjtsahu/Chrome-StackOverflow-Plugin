@@ -23,7 +23,7 @@ function setOpenMode(isPopup){
     }
 }
 
-chrome.browserAction.onClicked.addListener(function(activeTab){
+chrome.browserAction.onClicked.addListener(function(){
 var url = `chrome-extension://${appId}/${HOME_PAGE}`;
 chrome.tabs.create({ url: url });
 });
