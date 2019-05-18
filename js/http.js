@@ -5,27 +5,31 @@ const API_BASE = 'https://api.stackexchange.com/2.2/';
 /// default configs for axios
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-const MAX_QUESTION_PER_SEARCH = 5;
-const MAX_ANSWER_PER_QUESTION = 3;
-// including accepted answer or top 3 by votes
+const MAX_QUESTION_PER_SEARCH = defaultSettings.MAX_QUESTION_PER_SEARCH;
+const MAX_ANSWER_PER_QUESTION = defaultSettings.MAX_ANSWER_PER_QUESTION;
 
-const MIN_VOTES = 0;
-const MAX_VOTES = 100000;
+const MIN_VOTES = defaultSettings.MIN_VOTES;
+const MAX_VOTES = defaultSettings.MAX_VOTES;
+const API_KEY = defaultSettings.API_KEY;
 const PAGE_SIZE = MAX_QUESTION_PER_SEARCH;
-
-// show accepted + 2 answers in a question page
 
 const searchQueryParameters = {
     site: 'stackoverflow',
     sort: 'relevance',
     pagesize: PAGE_SIZE,
-    key: '',
+    key: API_KEY,
     //  intitle: 'query string in url'
 }
 
 const parser = Parser();
 
 async function getStackOverflowResults(searchQuery) {
+
+    let customPref = await Preferences.getCustomSetting();
+    if (customPref) {
+        searchQueryParameters.pagesize = customPref.MAX_QUESTION_PER_SEARCH;
+        searchQueryParameters.key = customPref.API_KEY;
+    }
 
     let searchCriteria = Object.assign({}, searchQueryParameters);
     searchCriteria.q = searchQuery;
@@ -63,8 +67,17 @@ const questionQueryParameters = {
     key: ''
 }
 
-async function getAnswersForQuestion(question_id, max_answers) {
-    max_answers = max_answers || MAX_ANSWER_PER_QUESTION;
+async function getAnswersForQuestion(question_id) {
+    let max_answers = MAX_ANSWER_PER_QUESTION;
+
+    let customPref = await Preferences.getCustomSetting();
+    if (customPref) {
+        questionQueryParameters.min = customPref.MIN_VOTES;
+        questionQueryParameters.max = customPref.MAX_VOTES;
+        questionQueryParameters.key = customPref.API_KEY;
+        max_answers = customPref.MAX_ANSWER_PER_QUESTION;
+    }
+
 
     let result = [];
 

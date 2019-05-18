@@ -22,7 +22,7 @@ const storage = {
 const defaultSettings = {
     MAX_QUESTION_PER_SEARCH: 5,
     MAX_ANSWER_PER_QUESTION: 3,
-    MIN_VOTES: 2,
+    MIN_VOTES: 0,
     MAX_VOTES: 10000,
     API_KEY: '',
     isOpenModePopUp: true
