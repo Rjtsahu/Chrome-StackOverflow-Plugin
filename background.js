@@ -10,20 +10,11 @@ async function setDefaultSetting() {
     let existingSetting = await Preferences.get(Preferences.SETTING_KEY);
     if (existingSetting === undefined || existingSetting === null || Object.keys(existingSetting).length === 0 ) {
         Preferences.set(Preferences.SETTING_KEY);
+        chrome.browserAction.setPopup({popup:'home.html'});
     }
 }
 
-function setOpenMode(isPopup){
-    if(isPopup === undefined) isPopup = false;
-
-    if(isPopup === true){
-        chrome.browserAction.setPopup({popup:HOME_PAGE});
-    }else{
-        chrome.browserAction.setPopup({popup:''});
-    }
-}
-
-chrome.browserAction.onClicked.addListener(function(activeTab){
+chrome.browserAction.onClicked.addListener(function(){
 var url = `chrome-extension://${appId}/${HOME_PAGE}`;
 chrome.tabs.create({ url: url });
 });

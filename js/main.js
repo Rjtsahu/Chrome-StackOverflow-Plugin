@@ -8,6 +8,7 @@ $("#search-button").click(() => {
 
 let searchService;
 const domFactory = DomFactory();
+const appId =  chrome.app.getDetails().id;
 
 async function initSearch(searchQuery) {
 
@@ -120,6 +121,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     let modalElem = document.getElementById('modal-recent-search');
     M.Modal.init(modalElem,modalOptions);
+
+
 });
 
 /// action for fab buttons
@@ -144,3 +147,9 @@ async function updateAutoCompleteData() {
 
     instance.updateData(autoCompleteData);
 }
+
+$('#button-setting').click(()=>{
+    /// setup setting page link
+    let url = `chrome-extension://${appId}/setting_page.html`;
+    chrome.tabs.create({ url: url });
+});
