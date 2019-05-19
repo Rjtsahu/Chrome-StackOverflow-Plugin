@@ -13,16 +13,6 @@ async function setDefaultSetting() {
     }
 }
 
-function setOpenMode(isPopup){
-    if(isPopup === undefined) isPopup = false;
-
-    if(isPopup === true){
-        chrome.browserAction.setPopup({popup:HOME_PAGE});
-    }else{
-        chrome.browserAction.setPopup({popup:''});
-    }
-}
-
 chrome.browserAction.onClicked.addListener(function(){
 var url = `chrome-extension://${appId}/${HOME_PAGE}`;
 chrome.tabs.create({ url: url });

@@ -25,6 +25,17 @@ async function loadSettings() {
     }
 }
 
+function setOpenMode(isPopup){
+
+    if(isPopup === undefined) isPopup = false;
+
+    if(isPopup === true){
+        chrome.browserAction.setPopup({popup:'home.html'});
+    }else{
+        chrome.browserAction.setPopup({popup:''});
+    }
+}
+
 function setupEventListeners() {
     elems.updateButton.onclick = function () {
 
@@ -35,7 +46,9 @@ function setupEventListeners() {
         newSetting.MIN_VOTES = elems.minVotes.value;
         newSetting.API_KEY = elems.apiKey.value;
         newSetting.isOpenModePopUp = elems.isPopupMode.checked;
-
+        
+        setOpenMode(elems.isPopupMode.checked);
+        
         Preferences.set(Preferences.SETTING_KEY,newSetting);
    
         M.toast({ html: 'Settings updated.' });
@@ -43,6 +56,9 @@ function setupEventListeners() {
 
     elems.restoreButton.onclick = function () {
         Preferences.set(Preferences.SETTING_KEY);
+        
+        setOpenMode(true);
+        
         M.toast({ html: 'Settings restored to default.' });
     }
 }
