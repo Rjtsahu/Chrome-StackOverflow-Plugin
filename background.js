@@ -10,6 +10,7 @@ async function setDefaultSetting() {
     let existingSetting = await Preferences.get(Preferences.SETTING_KEY);
     if (existingSetting === undefined || existingSetting === null || Object.keys(existingSetting).length === 0 ) {
         Preferences.set(Preferences.SETTING_KEY);
+        chrome.browserAction.setPopup({popup:'home.html'});
     }
 }
 
