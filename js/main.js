@@ -1,14 +1,14 @@
 
-$("#search-button").click(() => {
+function searchButtonClick() {
     let searchQuery = $('#search-input').val();
     if (searchQuery === '') return;
 
     initSearch(searchQuery);
-});
+}
 
 let searchService;
 const domFactory = DomFactory();
-const appId =  chrome.app.getDetails().id;
+const appId = chrome.app.getDetails().id;
 
 async function initSearch(searchQuery) {
 
@@ -43,7 +43,7 @@ function SearchService(searchQuery) {
         if (results.length === 0) {
             M.toast({ html: 'No Search result...' });
         } else {
-            document.getElementById('search-query').innerText = 'Result for ' + searchText;
+            document.getElementById('search-query').innerText = 'Result for \'' + searchText +'\'';
             // display answer div and hide search div
             domFactory.toggleBlockVisibility();
             domFactory.showQuestionCollapsible(questions);
@@ -113,27 +113,19 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     /// initialization for bookmark modal popup
     let modalOptions = {
-        onOpenStart : async ()=>{
+        onOpenStart: async () => {
             let searchedTerms = await Preferences.getAutoCompleteItems();
             searchedTerms = searchedTerms.reverse();
             domFactory.showRecentSearchItems(searchedTerms);
         }
     }
     let modalElem = document.getElementById('modal-recent-search');
-    M.Modal.init(modalElem,modalOptions);
+    M.Modal.init(modalElem, modalOptions);
 
 
 });
 
-/// action for fab buttons
-$("#button-back").click(() => {
-    if (searchService) {
-        domFactory.toggleBlockVisibility();
-        domFactory.removeCollapsibleContent();
-        updateAutoCompleteData();
-        searchService = undefined;
-    }
-});
+
 
 async function updateAutoCompleteData() {
     let elem = document.querySelector('.autocomplete');
@@ -148,7 +140,29 @@ async function updateAutoCompleteData() {
     instance.updateData(autoCompleteData);
 }
 
-$('#button-setting').click(()=>{
+$("#search-button").click(() => {
+    searchButtonClick();
+});
+
+$(document).keypress(function (event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    // on enter button click
+    if (keycode == '13') {
+        searchButtonClick();
+    }
+});
+
+/// action for fab buttons
+$("#button-back").click(() => {
+    if (searchService) {
+        domFactory.toggleBlockVisibility();
+        domFactory.removeCollapsibleContent();
+        updateAutoCompleteData();
+        searchService = undefined;
+    }
+});
+
+$('#button-setting').click(() => {
     /// setup setting page link
     let url = `chrome-extension://${appId}/setting_page.html`;
     chrome.tabs.create({ url: url });

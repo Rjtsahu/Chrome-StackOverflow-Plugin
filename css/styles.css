@@ -47,7 +47,7 @@ body{
 }
 #search-query{
     display:block;
-    font-size:10px;
+    font-size:18px;
 }
 .block-hidden{
     display: none;
@@ -187,3 +187,33 @@ custom scrollbar
   .collection .collection-item{
       font-size: 14px !important;
   }
+
+  .question-body::before {
+    background: #424d52;
+    content: 'Q';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    display: block;
+    color: white;
+    font-size: 18px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 25px;
+}
+
+.answer-body::before {
+    background: #eff9f6;
+    content: 'A';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    display: block;
+    color: black;
+    font-size: 18px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 25px;
+}

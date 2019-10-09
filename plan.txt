@@ -14,3 +14,9 @@ Assuming constants : max_question = 5 , max_answer =5
 
 How to show most_relavent_answer ?
 1) May be in collaplsible the sorting will be on this order ... and first answer will be from here 
+
+--- tasks
+
+-- search on enter button click
+-- visible tags/title for question and answer divs
+-- change ui for 'result for search'
