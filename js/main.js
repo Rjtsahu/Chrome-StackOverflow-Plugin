@@ -159,6 +159,7 @@ $("#button-back").click(() => {
         domFactory.removeCollapsibleContent();
         updateAutoCompleteData();
         searchService = undefined;
+        $('#search-input').val('');
     }
 });
 
